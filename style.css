@@ -1032,3 +1032,36 @@ body {
     padding: 6px;
   }
 }
+
+
+
+/* --------------------------------------------------------------------------
+   Extended measurement explanations
+   -------------------------------------------------------------------------- */
+.measurement-points--extended .measure-point {
+  min-height: 190px;
+}
+
+.measure-extra {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(13, 27, 42, 0.10);
+}
+
+.measure-extra p {
+  margin: 6px 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+
+.measure-extra b {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+@media (max-width: 820px) {
+  .measurement-points--extended .measure-point {
+    min-height: auto;
+  }
+}
