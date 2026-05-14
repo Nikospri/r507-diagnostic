@@ -170,7 +170,7 @@ const LIMITS = {
     // Superheat χαμηλής πλευράς
     superheat: { okLow: 8,  okHigh: 22,  warnLow: 5,  warnHigh: 32 },
     // Subcooling υψηλής πλευράς
-    subcooling:{ okLow: 2,  okHigh: 15,   warnLow: 1,  warnHigh: 20 },
+    subcooling:{ okLow: 2,  okHigh: 10,   warnLow: 1,  warnHigh: 14 },
     // Θερμοκρασία κατάθλιψης
     discharge: { okMax: 115, warnMax: 140 },
     // Σχέση συμπίεσης ανά βαθμίδα
@@ -361,7 +361,7 @@ function evaluateDischarge(t, mode) {
       causes: [
         'Πιθανή υψηλή σχέση συμπίεσης',
         'Ακάθαρτος ή υπερφορτωμένος συμπυκνωτής',
-        'Πιθανή μειωμένη απόδοση πύργου ψύξης',
+        'Υψηλή θερμοκρασία περιβάλλοντος',
         'Πιθανώς υψηλό superheat στην αναρρόφηση',
       ],
     };

@@ -797,3 +797,238 @@ body {
   .section-head { gap: 10px; }
   .mode-indicator { margin-left: 0; }
 }
+
+
+
+/* --------------------------------------------------------------------------
+   Ψυκτικός κύκλος / schematic
+   -------------------------------------------------------------------------- */
+.cycle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin: 0 0 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.cycle-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.cycle-card__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.cycle-card__title {
+  font-size: 18px;
+  margin: 0;
+  color: var(--text);
+}
+
+.cycle-card__badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #d5e3ee;
+  color: #1e4a6e;
+  font-weight: 600;
+}
+
+.cycle-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+  margin: 18px 0;
+}
+
+.cycle-box {
+  min-height: 92px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.cycle-box strong {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.cycle-box span {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.cycle-box--evap { border-left: 4px solid #1e88e5; }
+.cycle-box--comp { border-left: 4px solid #6d4c41; }
+.cycle-box--cond { border-left: 4px solid #c87a1b; }
+.cycle-box--txv  { border-left: 4px solid #006d77; }
+
+.cycle-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 8px 10px;
+}
+
+.measurement-points {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.measure-point {
+  padding: 12px 14px;
+  background: var(--info-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.measure-point strong {
+  display: block;
+  font-size: 13px;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+}
+
+.measure-point span {
+  display: block;
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .cycle-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .measurement-points {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* SVG industrial schematic */
+.cycle-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  background: #ffffff;
+  padding: 10px;
+}
+
+.cycle-svg {
+  width: 100%;
+  min-width: 820px;
+  height: auto;
+  display: block;
+}
+
+.svg-title {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--text);
+}
+
+.svg-sub {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  fill: var(--text-soft);
+}
+
+.svg-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #1e88e5;
+  letter-spacing: 0.08em;
+}
+
+.pipe {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pipe-blue { stroke: #1e88e5; }
+.pipe-red { stroke: #c23434; }
+.pipe-green { stroke: #1f8a4c; }
+.pipe-orange { stroke: #c87a1b; }
+
+.pipe-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  fill: #1e4a6e;
+}
+
+.pipe-label.red { fill: #9b2424; }
+.pipe-label.green { fill: #166c3a; }
+.pipe-label.orange { fill: #9b5b12; }
+
+.measure-label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--text);
+}
+
+.measure-small {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--text-soft);
+}
+
+.legend-text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--text-soft);
+}
+
+.measurement-dot circle {
+  stroke: #ffffff;
+  stroke-width: 3;
+}
+
+@media (max-width: 900px) {
+  .cycle-svg-wrap {
+    padding: 6px;
+  }
+}
