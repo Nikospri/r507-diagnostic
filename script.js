@@ -170,7 +170,7 @@ const LIMITS = {
     // Superheat χαμηλής πλευράς
     superheat: { okLow: 8,  okHigh: 22,  warnLow: 5,  warnHigh: 32 },
     // Subcooling υψηλής πλευράς
-    subcooling:{ okLow: 2,  okHigh: 10,   warnLow: 1,  warnHigh: 14 },
+    subcooling:{ okLow: 2,  okHigh: 15,   warnLow: 1,  warnHigh: 20 },
     // Θερμοκρασία κατάθλιψης
     discharge: { okMax: 115, warnMax: 140 },
     // Σχέση συμπίεσης ανά βαθμίδα
