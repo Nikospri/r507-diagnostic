@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <!-- Βασικά metadata της σελίδας -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Διαγνωστικό Εργαλείο R507 — Διβάθμιο Παλινδρομικό</title>
+
+  <!-- Εξωτερικό CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Γραμματοσειρές IBM Plex (καλή υποστήριξη ελληνικών) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+
+  <!-- ============================================================== -->
+  <!-- HEADER: τίτλος + επιλογέας mode (Κανονική / Ultra Low Temp)    -->
+  <!-- ============================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+
+      <!-- Brand: εικονίδιο + τίτλος -->
+      <div class="brand">
+        <svg class="brand__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none">
+            <line x1="12" y1="2"  x2="12" y2="22" />
+            <line x1="3"  y1="12" x2="21" y2="12" />
+            <line x1="5"  y1="5"  x2="19" y2="19" />
+            <line x1="19" y1="5"  x2="5"  y2="19" />
+            <polyline points="10,4 12,6 14,4" />
+            <polyline points="10,20 12,18 14,20" />
+            <polyline points="4,10 6,12 4,14" />
+            <polyline points="20,10 18,12 20,14" />
+          </g>
+        </svg>
+        <div>
+          <p class="brand__eyebrow">R-507A · Διβάθμιο Παλινδρομικό</p>
+          <h1 class="brand__title">Διαγνωστικό Ψυκτικού Κυκλώματος</h1>
+        </div>
+      </div>
+
+      
+      <div class="mode-toggle">
+        <span class="mode-toggle__label">Mode λειτουργίας</span>
+        <div class="mode-toggle__group">
+          <label style="background:#1e4a6e;color:white;border-radius:999px;padding:8px 16px;">
+            Lyophilizer / Deep Freeze
+          </label>
+        </div>
+      </div>
+
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================== -->
+  <!-- MAIN                                                            -->
+  <!-- ============================================================== -->
+  <main class="container main">
+
+    <!-- ============================================ -->
+    <!-- ΕΝΟΤΗΤΑ "Πού μετράω;" (collapsible)         -->
+    <!-- ============================================ -->
+    <details class="howto" open>
+      <summary class="howto__summary">
+        <span class="howto__icon">📍</span>
+        <span class="howto__title">Πού μετράω;</span>
+        <span class="howto__hint">Οδηγίες σημείων μέτρησης</span>
+      </summary>
+      <div class="howto__content">
+        <ul class="howto__list">
+          <li>
+            <strong>Αναρρόφηση:</strong>
+            στον σωλήνα αναρρόφησης, όσο πιο κοντά γίνεται
+            <em>πριν την είσοδο του συμπιεστή</em>.
+          </li>
+          <li>
+            <strong>Γραμμή υγρού:</strong>
+            <em>μετά τον συμπυκνωτή και πριν την εκτονωτική</em> βαλβίδα.
+          </li>
+          <li>
+            <strong>Ενδιάμεση θερμοκρασία:</strong>
+            μεταξύ <em>1ης και 2ης βαθμίδας</em>, κοντά στη γραμμή μεταξύ βαθμίδων ή στο σημείο ενδιάμεσης πίεσης.
+          </li>
+          <li>
+            <strong>Κατάθλιψη:</strong>
+            στον <em>σωλήνα εξόδου του συμπιεστή</em>, αμέσως μετά την κατάθλιψη.
+          </li>
+          <li>
+            <strong>Νερό συμπυκνωτή:</strong>
+            μετράμε <em>θερμοκρασία εισόδου νερού</em> πριν μπει στον υδρόψυκτο συμπυκνωτή
+            και <em>θερμοκρασία εξόδου νερού</em> αφού βγει από αυτόν.
+          </li>
+        </ul>
+      </div>
+    </details>
+
+
+    <!-- ============================================ -->
+    <!-- ΦΟΡΜΑ ΕΙΣΑΓΩΓΗΣ ΜΕΤΡΗΣΕΩΝ                    -->
+    <!-- ============================================ -->
+    <form id="form-diagnosis" class="inputs-grid" autocomplete="off">
+
+      <!-- 1. ΧΑΜΗΛΗ ΠΛΕΥΡΑ -->
+      <section class="card input-card">
+        <div class="card__index">01</div>
+        <h2 class="card__title">Χαμηλή πλευρά / Αναρρόφηση</h2>
+
+        <div class="field">
+          <label for="p-low">Πίεση αναρρόφησης (gauge)</label>
+          <div class="field__input">
+            <input type="number" id="p-low" step="0.01" placeholder="π.χ. 3.20 ή -0.20" />
+            <span class="field__unit">bar</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="t-low">Θερμοκρασία σωλήνα αναρρόφησης</label>
+          <div class="field__input">
+            <input type="number" id="t-low" step="0.1" placeholder="π.χ. -8.5" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ΥΨΗΛΗ ΠΛΕΥΡΑ -->
+      <section class="card input-card">
+        <div class="card__index">02</div>
+        <h2 class="card__title">Υψηλή πλευρά / Συμπύκνωση</h2>
+
+        <div class="field">
+          <label for="p-high">Πίεση υψηλής (gauge)</label>
+          <div class="field__input">
+            <input type="number" id="p-high" step="0.01" placeholder="π.χ. 17.50" />
+            <span class="field__unit">bar</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="t-liquid">Θερμοκρασία γραμμής υγρού</label>
+          <div class="field__input">
+            <input type="number" id="t-liquid" step="0.1" placeholder="π.χ. 32.0" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ΕΝΔΙΑΜΕΣΗ ΒΑΘΜΙΔΑ -->
+      <section class="card input-card">
+        <div class="card__index">03</div>
+        <h2 class="card__title">Ενδιάμεση βαθμίδα</h2>
+
+        <div class="field">
+          <label for="p-mid">Ενδιάμεση πίεση (gauge)</label>
+          <div class="field__input">
+            <input type="number" id="p-mid" step="0.01" placeholder="π.χ. 2.50" />
+            <span class="field__unit">bar</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="t-mid">Ενδιάμεση θερμοκρασία</label>
+          <div class="field__input">
+            <input type="number" id="t-mid" step="0.1" placeholder="π.χ. 5.0" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ΚΑΤΑΘΛΙΨΗ -->
+      <section class="card input-card">
+        <div class="card__index">04</div>
+        <h2 class="card__title">Κατάθλιψη συμπιεστή</h2>
+
+        <div class="field">
+          <label for="t-discharge">Θερμοκρασία κατάθλιψης</label>
+          <div class="field__input">
+            <input type="number" id="t-discharge" step="0.1" placeholder="π.χ. 85.0" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+
+        <!-- ghost field για ίδιο ύψος κάρτας -->
+        <div class="field field--ghost" aria-hidden="true"></div>
+      </section>
+
+
+      <!-- 5. ΝΕΡΟ ΣΥΜΠΥΚΝΩΤΗ / ΠΥΡΓΟΣ ΨΥΞΗΣ -->
+      <section class="card input-card">
+        <div class="card__index">05</div>
+        <h2 class="card__title">Νερό συμπυκνωτή / Πύργος ψύξης</h2>
+
+        <div class="field">
+          <label for="t-water-in">Θερμοκρασία νερού εισόδου συμπυκνωτή</label>
+          <div class="field__input">
+            <input type="number" id="t-water-in" step="0.1" placeholder="π.χ. 24.0" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="t-water-out">Θερμοκρασία νερού εξόδου συμπυκνωτή</label>
+          <div class="field__input">
+            <input type="number" id="t-water-out" step="0.1" placeholder="π.χ. 30.0" />
+            <span class="field__unit">°C</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ΚΟΥΜΠΙΑ -->
+      <div class="actions">
+        <button type="button" id="btn-calculate" class="btn btn--primary">Υπολογισμός</button>
+        <button type="button" id="btn-clear"     class="btn btn--ghost">Καθαρισμός πεδίων</button>
+      </div>
+    </form>
+
+
+    <!-- ============================================ -->
+    <!-- ΑΠΟΤΕΛΕΣΜΑΤΑ                                  -->
+    <!-- ============================================ -->
+    <section id="results" class="results" hidden aria-live="polite">
+
+      <header class="section-head">
+        <span class="section-head__line"></span>
+        <h2 class="section-head__title">Αποτελέσματα & Αξιολόγηση</h2>
+        <span id="mode-indicator" class="mode-indicator">Mode: Lyophilizer / Deep Freeze</span>
+      </header>
+
+      <div class="results-grid">
+        <article class="result-card" id="result-low"></article>
+        <article class="result-card" id="result-high"></article>
+        <article class="result-card" id="result-mid"></article>
+        <article class="result-card" id="result-discharge"></article>
+        <article class="result-card result-card--wide" id="result-condenser-water"></article>
+        
+      </div>
+
+      <!-- Τελική διάγνωση -->
+      <div class="diagnosis" id="diagnosis"></div>
+    </section>
+
+  </main>
+
+  <!-- JS αρχείο -->
+  <script src="script.js" defer></script>
+</body>
+</html>

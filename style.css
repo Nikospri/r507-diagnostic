@@ -1,0 +1,799 @@
+/* ==========================================================================
+   Διαγνωστικό R-507 · Φύλλο στυλ (style.css)
+   --------------------------------------------------------------------------
+   Καθαρό, επαγγελματικό design με τεχνική/μηχανολογική αισθητική.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1) CSS Variables — όλα τα tokens του design σε ένα σημείο
+   -------------------------------------------------------------------------- */
+:root {
+  /* Παλέτα φόντου & κειμένου */
+  --bg:           #f4f6f8;
+  --bg-grid:      #e8ecef;
+  --surface:      #ffffff;
+  --surface-alt:  #f7f9fb;
+  --border:       #d9dee3;
+  --border-soft:  #eaeef2;
+  --text:         #0d1b2a;
+  --text-soft:    #4a5a6a;
+  --text-mute:    #8092a2;
+
+  /* Brand */
+  --accent:       #006d77;
+  --accent-deep:  #003e44;
+  --accent-soft:  #e0f2f3;
+
+  /* Χρώματα κατάστασης */
+  --ok:           #1f8a4c;
+  --ok-bg:        #e6f5ec;
+  --ok-border:    #b8e0c8;
+
+  --warn:         #c87a1b;
+  --warn-bg:      #fdf3e2;
+  --warn-border:  #f3d8ad;
+
+  --danger:       #c23434;
+  --danger-bg:    #fbe6e6;
+  --danger-border:#f0bdbd;
+
+  --info-bg:      #eef2f6;
+  --info-border:  #d4dde6;
+
+  /* Τυπογραφία */
+  --font-sans:  'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Spacing & radius */
+  --radius:       10px;
+  --radius-sm:    6px;
+  --shadow-sm:    0 1px 2px rgba(13, 27, 42, 0.04);
+  --shadow-md:    0 4px 16px rgba(13, 27, 42, 0.06);
+  --shadow-lg:    0 10px 30px rgba(13, 27, 42, 0.08);
+
+  /* Transitions */
+  --t-fast:  120ms ease;
+  --t-med:   220ms ease;
+}
+
+
+/* --------------------------------------------------------------------------
+   2) Reset & base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background-color: var(--bg);
+  /* Διακριτικό μοτίβο γραμμών για "engineering" όψη */
+  background-image:
+    linear-gradient(to right,  var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+
+/* --------------------------------------------------------------------------
+   3) Header & Mode toggle
+   -------------------------------------------------------------------------- */
+.site-header {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0 24px;
+  position: relative;
+}
+
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--accent) 70%, transparent 100%);
+  opacity: 0.6;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand__icon {
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding: 8px;
+  background: var(--accent-soft);
+  border-radius: 50%;
+}
+
+.brand__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 4px;
+}
+
+.brand__title {
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* ----- Mode toggle (segmented control) ----- */
+.mode-toggle { display: flex; flex-direction: column; gap: 6px; }
+
+.mode-toggle__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  font-weight: 500;
+}
+
+.mode-toggle__group {
+  display: inline-flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-toggle__group input { display: none; }
+
+.mode-toggle__group label {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--text-soft);
+  transition: background var(--t-fast), color var(--t-fast);
+  user-select: none;
+}
+
+.mode-toggle__group label:hover { color: var(--text); }
+
+.mode-toggle__group input:checked + label {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Όταν είναι σε ULT, το χρώμα γίνεται πιο "ψυχρό" για να ξεχωρίζει */
+.mode-toggle__group input#mode-ult:checked + label {
+  background: #1e4a6e;
+  color: #ffffff;
+}
+
+
+/* --------------------------------------------------------------------------
+   4) Main + ενότητα "Πού μετράω;"
+   -------------------------------------------------------------------------- */
+.main { padding: 32px 24px 64px; }
+
+.howto {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.howto__summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--t-fast);
+}
+
+/* Αφαίρεση του default marker */
+.howto__summary::-webkit-details-marker { display: none; }
+.howto__summary::marker { content: ''; }
+
+.howto__summary:hover { background: var(--surface-alt); }
+
+.howto__icon { font-size: 18px; }
+
+.howto__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.howto__hint {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+/* Βελάκι που γυρίζει όταν είναι ανοιχτό */
+.howto__summary::after {
+  content: '▾';
+  color: var(--text-mute);
+  font-size: 12px;
+  transition: transform var(--t-fast);
+}
+
+.howto[open] .howto__summary::after { transform: rotate(180deg); }
+
+.howto__content {
+  padding: 4px 20px 20px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.howto__list {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.howto__list li {
+  padding: 12px 14px;
+  background: var(--info-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.howto__list li strong { color: var(--accent-deep); font-weight: 600; }
+.howto__list li em     { color: var(--text-soft); font-style: normal; font-weight: 500; }
+
+
+/* --------------------------------------------------------------------------
+   5) Κάρτες εισαγωγής (form)
+   -------------------------------------------------------------------------- */
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 24px 20px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-med), border-color var(--t-med);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #c5ccd3;
+}
+
+.card__index {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-mute);
+}
+
+.card__title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 18px;
+  color: var(--text);
+  letter-spacing: -0.005em;
+  padding-right: 36px;
+}
+
+/* Πεδίο εισαγωγής */
+.field { margin-bottom: 14px; }
+.field:last-child { margin-bottom: 0; }
+
+.field--ghost {
+  height: 64px;
+  visibility: hidden;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+.field__input {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.field__input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.12);
+}
+
+.field__input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 14px;
+  color: var(--text);
+  outline: none;
+  min-width: 0;
+  width: 100%;
+}
+
+.field__input input::placeholder {
+  color: var(--text-mute);
+  font-weight: 400;
+}
+
+.field__unit {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: #eef2f5;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-soft);
+  border-left: 1px solid var(--border);
+}
+
+
+/* --------------------------------------------------------------------------
+   6) Κουμπιά
+   -------------------------------------------------------------------------- */
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.btn {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--t-fast), border-color var(--t-fast),
+              color var(--t-fast), transform var(--t-fast);
+  letter-spacing: 0.01em;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn--primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+.btn--primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+.btn--ghost {
+  background: var(--surface);
+  color: var(--text-soft);
+  border-color: var(--border);
+}
+.btn--ghost:hover { background: var(--surface-alt); color: var(--text); border-color: #c5ccd3; }
+
+
+/* --------------------------------------------------------------------------
+   7) Αποτελέσματα
+   -------------------------------------------------------------------------- */
+.results { margin-top: 48px; }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.section-head__line {
+  flex: 0 0 32px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.section-head__title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+}
+
+.mode-indicator {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.mode-indicator.is-ult {
+  background: #d5e3ee;
+  color: #1e4a6e;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeUp 0.4s ease both;
+}
+
+.result-card--wide { grid-column: 1 / -1; }
+
+/* Κατάσταση: OK / Warn / Danger / Info */
+.result-card.is-ok     { border-left-color: var(--ok);     background: var(--ok-bg); }
+.result-card.is-warn   { border-left-color: var(--warn);   background: var(--warn-bg); }
+.result-card.is-danger { border-left-color: var(--danger); background: var(--danger-bg); }
+.result-card.is-info   { border-left-color: var(--accent); background: var(--surface); }
+
+/* Header κάρτας: τίτλος + tag διάγνωσης */
+.result-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.result-card__title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-mute);
+}
+.is-ok     .status-dot { background: var(--ok); }
+.is-warn   .status-dot { background: var(--warn); }
+.is-danger .status-dot { background: var(--danger); }
+.is-info   .status-dot { background: var(--accent); }
+
+/* Tag διάγνωσης (π.χ. "Πιθανή έλλειψη ψυκτικού") */
+.diag-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.diag-tag.is-ok     { background: var(--ok);     color: #fff; }
+.diag-tag.is-warn   { background: var(--warn);   color: #fff; }
+.diag-tag.is-danger { background: var(--danger); color: #fff; }
+
+/* Λίστα μετρήσεων μέσα στην κάρτα */
+.metrics {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.metrics li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(13, 27, 42, 0.06);
+  border-radius: var(--radius-sm);
+}
+
+.metric__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+  font-weight: 500;
+}
+
+.metric__value {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.metric__value .unit {
+  font-size: 12px;
+  color: var(--text-soft);
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.result-card__message {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* Πιθανές αιτίες — κάτω μέρος της κάρτας */
+.causes {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(13, 27, 42, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+.causes__title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.causes__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.causes__list li { margin-bottom: 2px; }
+
+/* Σχέσεις συμπίεσης */
+.ratios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 6px 0 14px;
+}
+
+.ratio-item {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(13, 27, 42, 0.06);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.ratio-item__label {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+.ratio-item__value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ratio-item__value .ratio-unit {
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 500;
+  margin-left: 4px;
+  font-family: var(--font-mono);
+}
+
+.ratio-item__value .badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.badge.is-ok     { background: var(--ok);     color: #fff; }
+.badge.is-warn   { background: var(--warn);   color: #fff; }
+.badge.is-danger { background: var(--danger); color: #fff; }
+
+
+/* --------------------------------------------------------------------------
+   8) Τελική διάγνωση
+   -------------------------------------------------------------------------- */
+.diagnosis {
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.diagnosis.is-ok     { background: var(--ok-bg);     border-color: var(--ok-border); }
+.diagnosis.is-warn   { background: var(--warn-bg);   border-color: var(--warn-border); }
+.diagnosis.is-danger { background: var(--danger-bg); border-color: var(--danger-border); }
+
+.diagnosis__icon {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.diagnosis__body { flex: 1; }
+
+.diagnosis__title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 6px;
+  color: var(--text-soft);
+}
+
+.diagnosis__text {
+  margin: 0;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Tags στην τελική διάγνωση (πιθανές κύριες διαγνώσεις) */
+.diagnosis__tags {
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Πρόσθετη γραμμή στη διάγνωση για ενότητες που δεν αξιολογήθηκαν */
+.diagnosis__missing {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(13, 27, 42, 0.15);
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.diagnosis__missing strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+
+/* --------------------------------------------------------------------------
+   9) Animations
+   -------------------------------------------------------------------------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --------------------------------------------------------------------------
+   10) Responsive — προσαρμογή για tablet & κινητά
+   -------------------------------------------------------------------------- */
+@media (max-width: 820px) {
+  .inputs-grid     { grid-template-columns: 1fr; }
+  .results-grid    { grid-template-columns: 1fr; }
+  .result-card--wide { grid-column: auto; }
+  .howto__list     { grid-template-columns: 1fr; }
+  .site-header__inner { gap: 18px; }
+}
+
+@media (max-width: 560px) {
+  .container { padding: 0 16px; }
+  .main      { padding: 24px 16px 40px; }
+
+  .site-header { padding: 22px 0 18px; }
+  .brand       { gap: 14px; }
+  .brand__icon { width: 38px; height: 38px; padding: 7px; }
+
+  .card { padding: 20px 18px; }
+  .card__title { font-size: 16px; }
+
+  .actions { flex-direction: column; }
+  .actions .btn { width: 100%; }
+
+  .diagnosis { padding: 18px 20px; font-size: 15px; }
+  .diagnosis__icon { font-size: 24px; }
+
+  .metric__value { font-size: 15px; }
+
+  .mode-toggle__group label { padding: 7px 12px; font-size: 12px; }
+
+  .section-head { gap: 10px; }
+  .mode-indicator { margin-left: 0; }
+}
