@@ -1032,3 +1032,1373 @@ body {
     padding: 6px;
   }
 }
+
+
+
+/* --------------------------------------------------------------------------
+   Σταθερό HTML/CSS διάγραμμα ψυκτικού κύκλου
+   -------------------------------------------------------------------------- */
+.cycle-svg-wrap,
+.cycle-svg,
+.cycle-flow {
+  display: none !important;
+}
+
+.cycle-visual {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr 1fr 0.85fr;
+  gap: 14px;
+  align-items: stretch;
+  margin: 20px 0 18px;
+}
+
+.cycle-step {
+  min-height: 128px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.cycle-step__icon {
+  font-size: 25px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.cycle-step strong {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.cycle-step span {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.cycle-step small {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.cycle-step--evap { border-left: 5px solid #1e88e5; background: #e8f3ff; }
+.cycle-step--comp { border-left: 5px solid #6d4c41; background: #f4ece8; }
+.cycle-step--cond { border-left: 5px solid #c87a1b; background: #fff3e2; }
+.cycle-step--txv  { border-left: 5px solid #006d77; background: #e0f2f3; }
+
+.cycle-arrow-box {
+  min-height: 128px;
+  border-radius: var(--radius);
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-align: center;
+  border: 1px solid var(--border-soft);
+  background: #fff;
+}
+
+.cycle-arrow-box span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cycle-arrow-box b {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.cycle-arrow-box em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.cycle-arrow-box--blue  { color: #1e88e5; background: #eef7ff; }
+.cycle-arrow-box--red   { color: #c23434; background: #fff0f0; }
+.cycle-arrow-box--green { color: #1f8a4c; background: #edf8f1; }
+.cycle-arrow-box--orange{ color: #c87a1b; background: #fff6e8; }
+
+@media (max-width: 980px) {
+  .cycle-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .cycle-arrow-box {
+    min-height: 80px;
+  }
+
+  .cycle-arrow-box b {
+    transform: rotate(90deg);
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Όμορφο σταθερό σχέδιο ψυκτικού κύκλου
+   -------------------------------------------------------------------------- */
+.cycle-visual { display: none !important; }
+
+.pretty-cycle {
+  width: 100%;
+  overflow-x: auto;
+  padding: 8px 0 4px;
+}
+
+.pretty-cycle__canvas {
+  position: relative;
+  min-width: 980px;
+  height: 520px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(30,136,229,.10), transparent 26%),
+    radial-gradient(circle at 80% 18%, rgba(200,122,27,.13), transparent 25%),
+    linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.component {
+  position: absolute;
+  width: 210px;
+  min-height: 120px;
+  border-radius: 16px;
+  padding: 16px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px rgba(13,27,42,.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  z-index: 3;
+}
+
+.component__icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  font-size: 24px;
+  margin-bottom: 2px;
+}
+
+.component strong {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.component span {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.component small {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  font-weight: 700;
+}
+
+.component--evaporator {
+  left: 70px;
+  bottom: 70px;
+  background: #e8f3ff;
+  border-color: #9fd0ff;
+}
+
+.component--compressor {
+  left: 390px;
+  bottom: 70px;
+  background: #f4ece8;
+  border-color: #d2b8ac;
+}
+
+.component--condenser {
+  right: 70px;
+  top: 70px;
+  background: #fff3e2;
+  border-color: #f0c987;
+}
+
+.component--expansion {
+  left: 70px;
+  top: 70px;
+  background: #e0f2f3;
+  border-color: #9bcfd3;
+}
+
+/* Pipes */
+.pipe {
+  position: absolute;
+  z-index: 1;
+}
+
+.pipe::before {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+}
+
+.pipe span {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(13,27,42,.12);
+  font-weight: 900;
+  z-index: 2;
+}
+
+/* Αναρρόφηση */
+.pipe--suction {
+  left: 280px;
+  bottom: 128px;
+  width: 110px;
+  height: 10px;
+}
+
+.pipe--suction::before {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 10px;
+  background: #1e88e5;
+}
+
+.pipe--suction span {
+  right: -18px;
+  top: -12px;
+  color: #1e88e5;
+}
+
+/* Κατάθλιψη */
+.pipe--discharge {
+  left: 585px;
+  bottom: 165px;
+  width: 245px;
+  height: 160px;
+  border-top: 10px solid #c23434;
+  border-right: 10px solid #c23434;
+  border-radius: 0 70px 0 0;
+}
+
+.pipe--discharge span {
+  right: -22px;
+  top: -22px;
+  color: #c23434;
+}
+
+/* Γραμμή υγρού */
+.pipe--liquid {
+  left: 280px;
+  top: 130px;
+  width: 520px;
+  height: 10px;
+}
+
+.pipe--liquid::before {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 10px;
+  background: #1f8a4c;
+}
+
+.pipe--liquid span {
+  left: -16px;
+  top: -12px;
+  transform: rotate(180deg);
+  color: #1f8a4c;
+}
+
+/* Μετά την εκτόνωση */
+.pipe--expansion {
+  left: 168px;
+  top: 190px;
+  width: 10px;
+  height: 160px;
+}
+
+.pipe--expansion::before {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: #c87a1b;
+}
+
+.pipe--expansion span {
+  left: -12px;
+  bottom: -18px;
+  transform: rotate(90deg);
+  color: #c87a1b;
+}
+
+/* Labels */
+.pipe-label {
+  position: absolute;
+  z-index: 4;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--text);
+  background: rgba(255,255,255,.88);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 7px 12px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.pipe-label b {
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.pipe-label--suction {
+  left: 278px;
+  bottom: 165px;
+}
+
+.pipe-label--discharge {
+  left: 640px;
+  bottom: 250px;
+}
+
+.pipe-label--liquid {
+  left: 420px;
+  top: 78px;
+}
+
+.pipe-label--expansion {
+  left: 22px;
+  top: 255px;
+}
+
+/* Measurement dots */
+.dot {
+  position: absolute;
+  z-index: 5;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgba(13,27,42,.2);
+}
+
+.dot--suction {
+  left: 315px;
+  bottom: 124px;
+  background: #1e88e5;
+}
+
+.dot--discharge {
+  left: 686px;
+  bottom: 305px;
+  background: #c23434;
+}
+
+.dot--liquid {
+  left: 390px;
+  top: 126px;
+  background: #1f8a4c;
+}
+
+.dot--water {
+  right: 155px;
+  top: 205px;
+  background: #006d77;
+}
+
+@media (max-width: 900px) {
+  .pretty-cycle__canvas {
+    transform-origin: top left;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Industrial dark ψυκτικός κύκλος
+   -------------------------------------------------------------------------- */
+
+.pretty-cycle,
+.cycle-visual,
+.cycle-svg-wrap,
+.cycle-flow {
+  display: none !important;
+}
+
+.industrial-diagram {
+  position: relative;
+  width: 100%;
+  min-height: 650px;
+  background:
+    radial-gradient(circle at 20% 70%, rgba(31,143,255,.12), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255,159,28,.13), transparent 30%),
+    linear-gradient(180deg, #101826 0%, #07111e 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #243247;
+  margin: 20px 0 22px;
+  box-shadow: 0 18px 45px rgba(13,27,42,.22);
+}
+
+.industrial-diagram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: .55;
+}
+
+.box {
+  position: absolute;
+  width: 220px;
+  min-height: 140px;
+  border-radius: 18px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35);
+  z-index: 5;
+  backdrop-filter: blur(6px);
+}
+
+.box h3 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.box p {
+  margin: 0;
+  opacity: .85;
+  font-size: 13px;
+}
+
+.icon {
+  font-size: 34px;
+}
+
+.evaporator {
+  left: 70px;
+  bottom: 85px;
+  background: rgba(18, 57, 95, .92);
+  border: 2px solid #2e9bff;
+}
+
+.compressor {
+  left: 420px;
+  bottom: 85px;
+  background: rgba(58, 45, 45, .92);
+  border: 2px solid #b98c8c;
+}
+
+.condenser {
+  right: 70px;
+  top: 85px;
+  background: rgba(91, 67, 22, .92);
+  border: 2px solid #ffbf47;
+}
+
+.txv {
+  left: 70px;
+  top: 85px;
+  background: rgba(13, 59, 66, .92);
+  border: 2px solid #48d4e8;
+}
+
+.line {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Αναρρόφηση: εξατμιστής -> συμπιεστής */
+.suction {
+  left: 290px;
+  bottom: 155px;
+  width: 130px;
+  height: 10px;
+  background: #1f8fff;
+  border-radius: 999px;
+  box-shadow: 0 0 16px #1f8fff;
+}
+
+.suction::after {
+  content: '➜';
+  position: absolute;
+  right: -28px;
+  top: -16px;
+  color: #1f8fff;
+  font-size: 34px;
+  text-shadow: 0 0 12px #1f8fff;
+}
+
+/* Κατάθλιψη: συμπιεστής -> συμπυκνωτής */
+.discharge {
+  left: 640px;
+  bottom: 225px;
+  width: 260px;
+  height: 170px;
+  border-top: 10px solid #ff4040;
+  border-right: 10px solid #ff4040;
+  border-radius: 0 95px 0 0;
+  box-shadow: 0 0 16px #ff4040;
+}
+
+.discharge::after {
+  content: '➜';
+  position: absolute;
+  right: -23px;
+  top: -23px;
+  color: #ff4040;
+  font-size: 34px;
+  text-shadow: 0 0 12px #ff4040;
+}
+
+/* Γραμμή υγρού: συμπυκνωτής -> εκτονωτική */
+.liquid {
+  left: 290px;
+  top: 155px;
+  width: 560px;
+  height: 10px;
+  background: #2fd36b;
+  border-radius: 999px;
+  box-shadow: 0 0 16px #2fd36b;
+}
+
+.liquid::after {
+  content: '➜';
+  position: absolute;
+  left: -28px;
+  top: -16px;
+  transform: rotate(180deg);
+  color: #2fd36b;
+  font-size: 34px;
+  text-shadow: 0 0 12px #2fd36b;
+}
+
+/* Μετά την εκτόνωση: εκτονωτική -> εξατμιστής */
+.expansion {
+  left: 176px;
+  top: 225px;
+  width: 10px;
+  height: 175px;
+  background: #ff9f1c;
+  border-radius: 999px;
+  box-shadow: 0 0 16px #ff9f1c;
+}
+
+.expansion::after {
+  content: '➜';
+  position: absolute;
+  bottom: -24px;
+  left: -13px;
+  transform: rotate(90deg);
+  color: #ff9f1c;
+  font-size: 34px;
+  text-shadow: 0 0 12px #ff9f1c;
+}
+
+.label {
+  position: absolute;
+  background: rgba(8, 13, 23, .92);
+  border: 1px solid #32445f;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  text-align: center;
+  z-index: 10;
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+.label strong {
+  color: #8fd3ff;
+}
+
+.label-suction {
+  left: 305px;
+  bottom: 190px;
+}
+
+.label-discharge {
+  left: 685px;
+  bottom: 350px;
+}
+
+.label-liquid {
+  left: 430px;
+  top: 92px;
+}
+
+.label-water {
+  right: 100px;
+  top: 250px;
+}
+
+@media (max-width: 1000px) {
+  .industrial-diagram {
+    min-height: auto;
+    padding: 24px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  .line,
+  .label {
+    display: none;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Dark industrial dashboard diagram
+   -------------------------------------------------------------------------- */
+.industrial-diagram,
+.pretty-cycle,
+.cycle-visual,
+.cycle-svg-wrap,
+.cycle-flow {
+  display: none !important;
+}
+
+.hvac-dashboard-diagram {
+  display: grid;
+  grid-template-columns: 220px minmax(720px, 1fr) 250px;
+  gap: 16px;
+  background: #060c14;
+  border: 1px solid #1f3148;
+  border-radius: 22px;
+  padding: 16px;
+  margin: 20px 0 22px;
+  color: #e8f1ff;
+  box-shadow: 0 22px 55px rgba(0,0,0,.28);
+  overflow-x: auto;
+}
+
+.dash-panel {
+  background: linear-gradient(180deg, rgba(18,28,42,.95), rgba(10,17,28,.95));
+  border: 1px solid #2a3f5a;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.dash-panel h3 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  margin: 10px 0;
+  color: #cbd7e8;
+}
+
+.legend-line {
+  width: 38px;
+  height: 5px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.legend-line.blue { background: #1f8fff; box-shadow: 0 0 10px #1f8fff; }
+.legend-line.red { background: #ff4040; box-shadow: 0 0 10px #ff4040; }
+.legend-line.green { background: #2fd36b; box-shadow: 0 0 10px #2fd36b; }
+.legend-line.orange { background: #ff9f1c; box-shadow: 0 0 10px #ff9f1c; }
+
+.legend-dot {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #8fd3ff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #8fd3ff;
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.dash-canvas {
+  position: relative;
+  min-width: 720px;
+  height: 570px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 25% 70%, rgba(31,143,255,.16), transparent 28%),
+    radial-gradient(circle at 75% 15%, rgba(255,64,64,.12), transparent 24%),
+    linear-gradient(180deg, #09111d, #050b13);
+  border: 1px solid #1d2f44;
+  overflow: hidden;
+}
+
+.dash-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: .65;
+}
+
+.dash-title {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  z-index: 10;
+}
+
+.dash-title strong {
+  display: block;
+  font-size: 21px;
+  color: #ffffff;
+  letter-spacing: .02em;
+}
+
+.dash-title span {
+  color: #91a6bf;
+  font-size: 13px;
+}
+
+.machine {
+  position: absolute;
+  z-index: 8;
+  width: 185px;
+  min-height: 112px;
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+  background: rgba(13,24,38,.92);
+  border: 1px solid #334b68;
+  box-shadow: 0 18px 30px rgba(0,0,0,.38);
+}
+
+.machine-icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.08);
+  font-size: 23px;
+}
+
+.machine b {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.machine span {
+  color: #b6c6d9;
+  font-size: 12px;
+}
+
+.machine--evap {
+  left: 70px;
+  bottom: 75px;
+  border-color: #1f8fff;
+  background: rgba(18,57,95,.78);
+}
+
+.machine--comp {
+  left: 315px;
+  bottom: 78px;
+  border-color: #b98c8c;
+  background: rgba(58,45,45,.78);
+}
+
+.machine--cond {
+  right: 60px;
+  top: 86px;
+  border-color: #ffbf47;
+  background: rgba(91,67,22,.78);
+}
+
+.machine--txv {
+  left: 70px;
+  top: 145px;
+  border-color: #48d4e8;
+  background: rgba(13,59,66,.78);
+}
+
+.neon-pipe {
+  position: absolute;
+  z-index: 3;
+}
+
+.neon-pipe i {
+  position: absolute;
+  font-style: normal;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* Suction */
+.suction-pipe {
+  left: 255px;
+  bottom: 132px;
+  width: 60px;
+  height: 9px;
+  background: #1f8fff;
+  border-radius: 999px;
+  box-shadow: 0 0 14px #1f8fff;
+}
+.suction-pipe i {
+  right: -28px;
+  top: -15px;
+  color: #1f8fff;
+}
+
+/* Discharge: compressor -> condenser, clean route */
+.discharge-pipe {
+  left: 500px;
+  bottom: 188px;
+  width: 170px;
+  height: 180px;
+  border-top: 9px solid #ff4040;
+  border-right: 9px solid #ff4040;
+  border-radius: 0 78px 0 0;
+  box-shadow: 0 0 14px #ff4040;
+}
+.discharge-pipe i {
+  right: -23px;
+  top: -22px;
+  color: #ff4040;
+}
+
+/* Liquid: condenser -> TXV */
+.liquid-pipe {
+  left: 255px;
+  top: 195px;
+  width: 405px;
+  height: 9px;
+  background: #2fd36b;
+  border-radius: 999px;
+  box-shadow: 0 0 14px #2fd36b;
+}
+.liquid-pipe i {
+  left: -28px;
+  top: -15px;
+  transform: rotate(180deg);
+  color: #2fd36b;
+}
+
+/* Expansion: TXV -> evaporator */
+.expansion-pipe {
+  left: 158px;
+  top: 258px;
+  width: 9px;
+  height: 130px;
+  background: #ff9f1c;
+  border-radius: 999px;
+  box-shadow: 0 0 14px #ff9f1c;
+}
+.expansion-pipe i {
+  left: -12px;
+  bottom: -27px;
+  transform: rotate(90deg);
+  color: #ff9f1c;
+}
+
+.dash-label {
+  position: absolute;
+  z-index: 12;
+  background: rgba(7,12,20,.92);
+  border: 1px solid #314865;
+  border-radius: 14px;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  box-shadow: 0 12px 26px rgba(0,0,0,.35);
+}
+
+.dash-label b { color: #8fd3ff; }
+
+.dash-label--suction {
+  left: 238px;
+  bottom: 170px;
+}
+
+.dash-label--discharge {
+  left: 502px;
+  bottom: 348px;
+}
+
+.dash-label--liquid {
+  left: 330px;
+  top: 130px;
+}
+
+.dash-label--expansion {
+  left: 18px;
+  top: 318px;
+}
+
+.measure-badge {
+  position: absolute;
+  z-index: 15;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #08111d;
+  border: 2px solid #8fd3ff;
+  color: #8fd3ff;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  box-shadow: 0 0 12px rgba(143,211,255,.45);
+}
+
+.measure-badge small {
+  display: block;
+  font-size: 8px;
+  margin-top: -8px;
+}
+
+.badge-plp { left: 226px; bottom: 103px; border-color:#1f8fff; color:#1f8fff; }
+.badge-tsuc { left: 255px; bottom: 190px; border-color:#1f8fff; color:#8fd3ff; }
+.badge-php { left: 474px; bottom: 358px; border-color:#ff4040; color:#ff7a7a; }
+.badge-tdis { left: 545px; bottom: 342px; border-color:#ff4040; color:#ff7a7a; }
+.badge-tliq { left: 430px; top: 178px; border-color:#2fd36b; color:#7dffad; }
+.badge-water { right: 115px; top: 212px; border-color:#48d4e8; color:#8ef5ff; }
+
+.measure-help {
+  border-top: 1px solid #263b55;
+  padding: 12px 0;
+}
+
+.measure-help b {
+  display: block;
+  color: #8fd3ff;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.measure-help span {
+  color: #cbd7e8;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1150px) {
+  .hvac-dashboard-diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-panel {
+    min-width: 720px;
+  }
+}
+
+
+
+/* ===== Dashboard layout fixes ===== */
+
+.hvac-dashboard-diagram {
+  grid-template-columns: 180px 1fr 220px !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+.dash-canvas {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 620px !important;
+}
+
+.dash-panel {
+  overflow: hidden;
+}
+
+.dash-panel--left {
+  padding-right: 10px !important;
+}
+
+.dash-panel--right {
+  padding-left: 10px !important;
+}
+
+.machine {
+  z-index: 8 !important;
+}
+
+.measure-badge {
+  z-index: 20 !important;
+  width: 54px !important;
+  height: 54px !important;
+  font-size: 18px !important;
+  background: #02060d !important;
+  backdrop-filter: blur(6px);
+}
+
+.measure-badge small {
+  font-size: 9px !important;
+  margin-top: -4px !important;
+  line-height: 1;
+}
+
+.badge-plp {
+  left: 250px !important;
+  bottom: 95px !important;
+}
+
+.badge-tsuc {
+  left: 305px !important;
+  bottom: 170px !important;
+}
+
+.badge-php {
+  left: 520px !important;
+  bottom: 355px !important;
+}
+
+.badge-tdis {
+  left: 620px !important;
+  bottom: 340px !important;
+}
+
+.badge-tliq {
+  left: 470px !important;
+  top: 170px !important;
+}
+
+.badge-water {
+  right: 120px !important;
+  top: 215px !important;
+}
+
+.dash-label {
+  z-index: 18 !important;
+  font-size: 13px !important;
+}
+
+.dash-label--liquid {
+  left: 330px !important;
+  top: 105px !important;
+}
+
+.dash-label--discharge {
+  left: 520px !important;
+  bottom: 390px !important;
+}
+
+.discharge-pipe {
+  left: 540px !important;
+  bottom: 205px !important;
+  width: 210px !important;
+  height: 185px !important;
+}
+
+.liquid-pipe {
+  left: 255px !important;
+  top: 190px !important;
+  width: 500px !important;
+}
+
+.suction-pipe {
+  width: 90px !important;
+}
+
+.machine--cond {
+  right: 50px !important;
+}
+
+.machine--comp {
+  left: 330px !important;
+}
+
+.machine--evap {
+  left: 70px !important;
+}
+
+.machine--txv {
+  left: 70px !important;
+}
+
+@media (max-width: 1200px) {
+  .hvac-dashboard-diagram {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dash-panel {
+    min-width: 0 !important;
+  }
+
+  .dash-canvas {
+    min-width: 100% !important;
+    overflow: hidden !important;
+    height: 760px !important;
+  }
+}
+
+
+
+
+/* --------------------------------------------------------------------------
+   Clean responsive dashboard diagram - stable browser version
+   -------------------------------------------------------------------------- */
+.hvac-dashboard-diagram,
+.industrial-diagram,
+.pretty-cycle,
+.cycle-visual,
+.cycle-svg-wrap,
+.cycle-flow {
+  display: none !important;
+}
+
+.clean-cycle-dashboard {
+  width: 100%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(31,143,255,.14), transparent 26%),
+    radial-gradient(circle at 80% 10%, rgba(255,64,64,.12), transparent 28%),
+    linear-gradient(180deg, #0b1220 0%, #06101d 100%);
+  border: 1px solid #243247;
+  border-radius: 22px;
+  padding: 22px;
+  margin: 20px 0 24px;
+  color: #e8f1ff;
+  box-shadow: 0 18px 45px rgba(13,27,42,.22);
+  overflow: hidden;
+}
+
+.clean-cycle-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  padding-bottom: 16px;
+}
+
+.clean-cycle-header h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #ffffff;
+}
+
+.clean-cycle-header p {
+  margin: 4px 0 0;
+  color: #9fb2ca;
+  font-size: 14px;
+}
+
+.clean-cycle-header > span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #8fd3ff;
+  background: rgba(143,211,255,.10);
+  border: 1px solid rgba(143,211,255,.25);
+  padding: 7px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.clean-cycle-grid {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(130px, .8fr) minmax(150px, 1fr) minmax(130px, .8fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.clean-component,
+.clean-pipe {
+  min-height: 130px;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.clean-component {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 22px rgba(0,0,0,.22);
+}
+
+.clean-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.10);
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.clean-component strong {
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.clean-component small {
+  color: #b5c6db;
+  font-size: 12px;
+}
+
+.clean-evaporator { border-left: 5px solid #1f8fff; background: rgba(31,143,255,.13); }
+.clean-compressor { border-left: 5px solid #b98c8c; background: rgba(185,140,140,.13); }
+.clean-condenser  { border-left: 5px solid #ffbf47; background: rgba(255,191,71,.13); }
+.clean-txv        { border-left: 5px solid #48d4e8; background: rgba(72,212,232,.13); }
+
+.clean-pipe {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.clean-pipe::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 50%;
+  height: 8px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.clean-pipe em {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-52%);
+  font-style: normal;
+  font-size: 34px;
+  font-weight: 900;
+  z-index: 3;
+}
+
+.clean-pipe b,
+.clean-pipe span {
+  position: relative;
+  z-index: 4;
+  background: rgba(6,16,29,.86);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.clean-pipe b {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.clean-pipe span {
+  font-size: 12px;
+  color: #cbd7e8;
+}
+
+.clean-pipe-blue::before  { background: #1f8fff; box-shadow: 0 0 16px #1f8fff; }
+.clean-pipe-blue em       { color: #1f8fff; text-shadow: 0 0 12px #1f8fff; }
+
+.clean-pipe-red::before   { background: #ff4040; box-shadow: 0 0 16px #ff4040; }
+.clean-pipe-red em        { color: #ff4040; text-shadow: 0 0 12px #ff4040; }
+
+.clean-pipe-green::before { background: #2fd36b; box-shadow: 0 0 16px #2fd36b; }
+.clean-pipe-green em      { color: #2fd36b; text-shadow: 0 0 12px #2fd36b; }
+
+.clean-pipe-orange::before { background: #ff9f1c; box-shadow: 0 0 16px #ff9f1c; }
+.clean-pipe-orange em      { color: #ff9f1c; text-shadow: 0 0 12px #ff9f1c; }
+
+.clean-measurements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.clean-measurements div {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.clean-measurements b {
+  display: block;
+  color: #8fd3ff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.clean-measurements span {
+  color: #cbd7e8;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .clean-cycle-grid,
+  .clean-measurements {
+    grid-template-columns: 1fr;
+  }
+
+  .clean-cycle-header {
+    flex-direction: column;
+  }
+
+  .clean-pipe {
+    min-height: 85px;
+  }
+
+  .clean-pipe::before {
+    left: 22px;
+    right: 22px;
+  }
+}

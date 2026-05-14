@@ -112,108 +112,83 @@
       <header class="cycle-card__header">
         <div>
           <p class="cycle-card__eyebrow">Σχηματικό διάγραμμα</p>
-          <h2 class="cycle-card__title">Ψυκτικός κύκλος R507 — σημεία μέτρησης</h2>
+          <h2 class="cycle-card__title">Ψυκτικός κύκλος  — σημεία μέτρησης</h2>
         </div>
         <span class="cycle-card__badge">Lyophilizer / Deep Freeze</span>
       </header>
 
-      <div class="cycle-svg-wrap">
-        <svg class="cycle-svg" viewBox="0 0 1100 520" role="img" aria-label="Σχέδιο ψυκτικού κύκλου R507 για λυοφιλοποιητή">
-          
+      <div class="clean-cycle-dashboard">
+        <div class="clean-cycle-header">
+          <div>
+            <h3>Ψυκτικός κύκλος</h3>
+            <p>Lyophilizer / Deep Freeze — σημεία μέτρησης</p>
+          </div>
+          <span>Industrial Diagnostic View</span>
+        </div>
 
-          <!-- Background panel -->
-          <rect x="20" y="20" width="1060" height="480" rx="18" fill="#f7f9fb" stroke="#d9dee3"/>
+        <div class="clean-cycle-grid">
 
-          <!-- Components -->
-          <g class="svg-component">
-            <rect x="70" y="290" width="200" height="120" rx="14" fill="#e8f3ff" stroke="#1e88e5" stroke-width="2" filter="url(#softShadow)"/>
-            <text x="170" y="340" text-anchor="middle" class="svg-title">Εξατμιστής</text>
-            <text x="170" y="366" text-anchor="middle" class="svg-sub">-55°C έως -80°C</text>
-            <text x="170" y="390" text-anchor="middle" class="svg-tag">LOW TEMP</text>
-          </g>
+          <div class="clean-component clean-evaporator">
+            <div class="clean-icon">❄️</div>
+            <strong>Εξατμιστής</strong>
+            <small>-55°C έως -80°C</small>
+          </div>
 
-          <g class="svg-component">
-            <rect x="430" y="285" width="230" height="130" rx="14" fill="#f4ece8" stroke="#6d4c41" stroke-width="2" filter="url(#softShadow)"/>
-            <circle cx="505" cy="350" r="34" fill="#fff" stroke="#6d4c41" stroke-width="2"/>
-            <circle cx="585" cy="350" r="34" fill="#fff" stroke="#6d4c41" stroke-width="2"/>
-            <text x="545" y="322" text-anchor="middle" class="svg-title">Διβάθμιος</text>
-            <text x="545" y="392" text-anchor="middle" class="svg-title">Συμπιεστής</text>
-            <text x="545" y="438" text-anchor="middle" class="svg-sub">παλινδρομικός</text>
-          </g>
+          <div class="clean-pipe clean-pipe-blue">
+            <b>Αναρρόφηση / LP</b>
+            <span>Superheat</span>
+            <em>➜</em>
+          </div>
 
-          <g class="svg-component">
-            <rect x="790" y="70" width="230" height="130" rx="14" fill="#fff3e2" stroke="#c87a1b" stroke-width="2" filter="url(#softShadow)"/>
-            <path d="M830 100 h150 M830 125 h150 M830 150 h150 M830 175 h150" stroke="#c87a1b" stroke-width="4" stroke-linecap="round"/>
-            <text x="905" y="50" text-anchor="middle" class="svg-title">Υδρόψυκτος συμπυκνωτής</text>
-            <text x="905" y="225" text-anchor="middle" class="svg-sub">νερό πύργου ψύξης</text>
-          </g>
+          <div class="clean-component clean-compressor">
+            <div class="clean-icon">⚙️</div>
+            <strong>Διβάθμιος συμπιεστής</strong>
+            <small>Παλινδρομικός R507</small>
+          </div>
 
-          <g class="svg-component">
-            <polygon points="130,105 210,105 170,170" fill="#e0f2f3" stroke="#006d77" stroke-width="2" filter="url(#softShadow)"/>
-            <text x="170" y="90" text-anchor="middle" class="svg-title">Εκτονωτική</text>
-            <text x="170" y="188" text-anchor="middle" class="svg-sub">TXV / EEV</text>
-          </g>
+          <div class="clean-pipe clean-pipe-red">
+            <b>Κατάθλιψη / HP</b>
+            <span>T κατάθλιψης</span>
+            <em>➜</em>
+          </div>
 
-          <!-- Pipes / flow -->
-          <!-- Suction line -->
-          <path d="M270 350 H430" class="pipe pipe-blue"/>
-          <text x="350" y="332" text-anchor="middle" class="pipe-label">Αναρρόφηση / LP ➜</text>
+          <div class="clean-component clean-condenser">
+            <div class="clean-icon">💧</div>
+            <strong>Υδρόψυκτος συμπυκνωτής</strong>
+            <small>Νερό πύργου ψύξης</small>
+          </div>
 
-          <!-- Discharge line from compressor to condenser -->
-          <path d="M660 330 C730 300 760 230 790 160" class="pipe pipe-red"/>
-          <text x="735" y="270" text-anchor="middle" class="pipe-label red">Κατάθλιψη / HP ➜</text>
+          <div class="clean-pipe clean-pipe-green">
+            <b>Γραμμή υγρού</b>
+            <span>Subcooling / Flash gas</span>
+            <em>➜</em>
+          </div>
 
-          <!-- Liquid line from condenser to expansion valve -->
-          <path d="M790 135 H210" class="pipe pipe-green"/>
-          <text x="500" y="115" text-anchor="middle" class="pipe-label green">Γραμμή υγρού — εδώ ελέγχουμε subcooling / flash gas</text>
+          <div class="clean-component clean-txv">
+            <div class="clean-icon">▽</div>
+            <strong>Εκτονωτική</strong>
+            <small>TXV / EEV</small>
+          </div>
 
-          <!-- Expansion to evaporator -->
-          <path d="M170 170 V290" class="pipe pipe-orange"/>
-          <text x="118" y="240" text-anchor="middle" class="pipe-label orange" transform="rotate(-90 118 240)">Μείωση πίεσης ➜</text>
+          <div class="clean-pipe clean-pipe-orange">
+            <b>Μετά την εκτόνωση</b>
+            <span>Προς εξατμιστή</span>
+            <em>➜</em>
+          </div>
 
-          <!-- Measurement points -->
-          <g class="measurement-dot">
-            <circle cx="330" cy="350" r="9" fill="#1e88e5"/>
-            <text x="330" y="383" text-anchor="middle" class="measure-label">T αναρρόφησης</text>
-            <text x="330" y="402" text-anchor="middle" class="measure-small">Superheat</text>
-          </g>
+        </div>
 
-          <g class="measurement-dot">
-            <circle cx="705" cy="285" r="9" fill="#c23434"/>
-            <text x="705" y="318" text-anchor="middle" class="measure-label">T κατάθλιψης</text>
-          </g>
+        <div class="clean-measurements">
+          <div><b>P LP</b><span>Πίεση αναρρόφησης</span></div>
+          <div><b>T suction</b><span>Θερμοκρασία αναρρόφησης</span></div>
+          <div><b>P HP</b><span>Πίεση υψηλής</span></div>
+          <div><b>T discharge</b><span>Θερμοκρασία κατάθλιψης</span></div>
+          <div><b>T liquid</b><span>Θερμοκρασία γραμμής υγρού</span></div>
+          <div><b>T water</b><span>Νερό συμπυκνωτή in/out</span></div>
+        </div>
+      </div>
 
-          <g class="measurement-dot">
-            <circle cx="365" cy="135" r="9" fill="#1f8a4c"/>
-            <text x="365" y="166" text-anchor="middle" class="measure-label">T γραμμής υγρού</text>
-            <text x="365" y="185" text-anchor="middle" class="measure-small">Subcooling</text>
-          </g>
-
-          <g class="measurement-dot">
-            <circle cx="930" cy="210" r="8" fill="#006d77"/>
-            <text x="930" y="252" text-anchor="middle" class="measure-label">Νερό in/out</text>
-            <text x="930" y="271" text-anchor="middle" class="measure-small">πύργος / συμπυκνωτής</text>
-          </g>
-
-          <g class="measurement-dot">
-            <circle cx="545" cy="285" r="8" fill="#6d4c41"/>
-            <text x="545" y="260" text-anchor="middle" class="measure-label">Ενδιάμεση βαθμίδα</text>
-            <text x="545" y="242" text-anchor="middle" class="measure-small"> </text>
-          </g>
-
-          <!-- Legend -->
-          <g class="svg-legend">
-            <rect x="60" y="440" width="990" height="42" rx="10" fill="#ffffff" stroke="#d9dee3"/>
-            <circle cx="90" cy="461" r="6" fill="#1e88e5"/><text x="105" y="466" class="legend-text">χαμηλή / αναρρόφηση</text>
-            <circle cx="285" cy="461" r="6" fill="#c23434"/><text x="300" y="466" class="legend-text">υψηλή / κατάθλιψη</text>
-            <circle cx="465" cy="461" r="6" fill="#1f8a4c"/><text x="480" y="466" class="legend-text">γραμμή υγρού</text>
-            <circle cx="625" cy="461" r="6" fill="#c87a1b"/><text x="640" y="466" class="legend-text">εκτόνωση</text>
-            <text x="800" y="466" class="legend-text">Mετράμε πάντα πάνω στον σωλήνα/χαλκό.</text>
-          </g>
-        </svg>
-      </div></div>
-
-      <div class="measurement-points">
+<div class="measurement-points">
         <div class="measure-point">
           <strong>Superheat</strong>
           <span>Πίεση αναρρόφησης + θερμοκρασία σωλήνα αναρρόφησης, πάνω στον χαλκό πριν τον συμπιεστή.</span>
