@@ -420,9 +420,9 @@ function evaluateMidSuperheat(sh) {
   return {
     status: 'warn',
     tag: 'Υψηλό ενδιάμεσο SH',
-    message: `Υψηλό ενδιάμεσο superheat (${fmt(sh,1)}°C).`,
+    message: `Αυξημένο ενδιάμεσο superheat (${fmt(sh,1)}°C).`,
     causes: [
-      'Ανεπαρκής τροφοδοσία intercooler',
+      'Ανεπαρκής ψύξη μεταξύ βαθμίδων',
       'Πιθανή έλλειψη ψυκτικού στο ενδιάμεσο',
       'Φραγή στη γραμμή ενδιάμεσης βαθμίδας',
     ],
